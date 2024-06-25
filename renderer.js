@@ -6,3 +6,12 @@ document.getElementById('select-file-button').addEventListener('click', async ()
     document.getElementById('selected-file').innerText = `Selected file: ${filePaths[0]}`;
   }
 });
+
+document.getElementById('open-file').addEventListener('click', async () => {
+  ipcRenderer.send('open-file');    
+})
+
+
+ipcRenderer.on('response-data', (event, data) => {
+  console.log(data);
+});

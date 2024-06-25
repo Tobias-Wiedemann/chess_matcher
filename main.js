@@ -1,6 +1,8 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
+let inputPath = '';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -34,3 +36,11 @@ ipcMain.handle('open-file-dialog', async (event) => {
   });
   return result.filePaths;
 });
+
+ipcMain.on('open-file', (event) => {
+  if (inputPath === '') {
+    event.reply('response-data', { message: 'Empty file path selected' });
+  } else {
+    event.reply('response-data', { message: 'Non-empty file path selected' });
+  }
+})
