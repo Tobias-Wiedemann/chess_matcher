@@ -34,13 +34,25 @@ ipcMain.handle('open-file-dialog', async (event) => {
   const result = await dialog.showOpenDialog({
     properties: ['openFile'],
   });
+  inputPath = result.filePaths[0];
   return result.filePaths;
 });
 
 ipcMain.on('open-file', (event) => {
   if (inputPath === '') {
-    event.reply('response-data', { message: 'Empty file path selected' });
+    event.reply('response-data', { message: 'Tried to open empty file path' });
   } else {
-    event.reply('response-data', { message: 'Non-empty file path selected' });
+    try {
+      fs.readFile(inputPath, 'utf8', (err, data) => {
+        if (err) {
+          console.error(`Error reading the file: ${err}`);
+          return;
+        }
+        event.reply('response-data', { message: `${data}`});
+      });
+    } catch(error) {
+      event.reply('response-data', { message: `failed opening '${inputPath}'`});
+    }
+    event.reply('response-data', { message: `'${inputPath}' is the opened file path`});
   }
 })
