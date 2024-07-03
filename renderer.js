@@ -14,7 +14,7 @@ document.getElementById('open-file').addEventListener('click', async () => {
 document.getElementById('start-process-button').addEventListener('click', async () => {
   let resultFilePath = document.getElementById('fname').value;
   ipcRenderer.send('save-file', resultFilePath);
-  document.getElementById('new-file-name').innerHTML = `New file name: ${resultFilePath}`;
+  document.getElementById('new-file-name').innerHTML = `New file name: ${resultFilePath}.txt`;
 
 })
 

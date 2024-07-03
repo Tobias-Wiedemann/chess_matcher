@@ -58,12 +58,14 @@ ipcMain.on('open-file', (event) => {
     }
     event.reply('response-data', { message: `'${inputPath}' is the opened file path`});
   }
+  do_the_stuff();
 })
 
-ipcMain.on('save-file', (event) => {
-  if (resultPath === '') {
+ipcMain.on('save-file', (event, data) => {
+  if (data === '') {
     event.reply('response-data', { message: 'Tried to open empty file path' });
   } else {
+    resultPath = './' + data + '.txt';
     try {
       fs.writeFile(resultPath, finalData, err => {
         if (err) {
@@ -80,8 +82,11 @@ ipcMain.on('save-file', (event) => {
   }
 })
 
-
 ipcMain.on('process', (event) => {
 
   event.reply('response-data', { message: `'${event.data}' is the opened file path`});
 })
+
+function do_the_stuff() {
+  
+}
