@@ -11,6 +11,12 @@ document.getElementById('open-file').addEventListener('click', async () => {
   ipcRenderer.send('open-file');    
 })
 
+document.getElementById('start-process-button').addEventListener('click', async () => {
+  ipcRenderer.send('');
+  let x = "x";
+  document.getElementById('new-file-name').innerText = `New file name: ${x}`;
+
+})
 
 ipcRenderer.on('response-data', (event, data) => {
   console.log(data);

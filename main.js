@@ -56,3 +56,8 @@ ipcMain.on('open-file', (event) => {
     event.reply('response-data', { message: `'${inputPath}' is the opened file path`});
   }
 })
+
+ipcMain.on('start-process', (event) => {
+
+  event.reply('response-data', { message: `'${event.data}' is the opened file path`});
+})

@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <title>Chess Matcher!</title>
   </head>
   <body>
     <h1>Select a File</h1>
+    <p>Click the button to select a .txt file. This should include the player list of the correct format. 
+      <br>Then enter a new file name. The results will be in this file in the same folder as the initial .txt file.
+      <br> 
+    </p>
     <button id="select-file-button">Select File</button>
-    <p id="selected-file"></p>
+    <p id="selected-file">Currently no file selected</p>
     <button id="open-file">Open File</button>
     <input type="text" id="fname" name="fname"><br><br>
+    <p id="new-file-name"></p>
     <button id="start-process-button">Make matches and save</button>
     <script defer src="./renderer.js"></script>
   </body>
