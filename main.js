@@ -3,6 +3,8 @@ const path = require('path');
 const fs = require('fs');
 
 let inputPath = '';
+let resultPath = '';
+let finalData = '';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -48,6 +50,7 @@ ipcMain.on('open-file', (event) => {
           console.error(`Error reading the file: ${err}`);
           return;
         }
+        finalData = data;
         event.reply('response-data', { message: `${data}`});
       });
     } catch(error) {
@@ -57,7 +60,28 @@ ipcMain.on('open-file', (event) => {
   }
 })
 
-ipcMain.on('start-process', (event) => {
+ipcMain.on('save-file', (event) => {
+  if (resultPath === '') {
+    event.reply('response-data', { message: 'Tried to open empty file path' });
+  } else {
+    try {
+      fs.writeFile(resultPath, finalData, err => {
+        if (err) {
+          console.error(err);
+        } else {
+          // file written successfully
+        }
+      });
+
+    } catch(error) {
+      event.reply('response-data', { message: `failed saving '${resultPath}'`});
+    }
+    event.reply('response-data', { message: `'${resultPath}' is the resulting file path`});
+  }
+})
+
+
+ipcMain.on('process', (event) => {
 
   event.reply('response-data', { message: `'${event.data}' is the opened file path`});
 })
