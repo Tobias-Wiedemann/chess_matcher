@@ -51,14 +51,14 @@ ipcMain.on('open-file', (event) => {
           return;
         }
         finalData = data;
-        event.reply('response-data', { message: `${data}`});
+        event.reply('response-data', { message: `data: ${data}`});
+        processPlayerList();
       });
     } catch(error) {
       event.reply('response-data', { message: `failed opening '${inputPath}'`});
     }
     event.reply('response-data', { message: `'${inputPath}' is the opened file path`});
   }
-  do_the_stuff();
 })
 
 ipcMain.on('save-file', (event, data) => {
@@ -87,6 +87,18 @@ ipcMain.on('process', (event) => {
   event.reply('response-data', { message: `'${event.data}' is the opened file path`});
 })
 
-function do_the_stuff() {
+function processPlayerList() {
+  let splitData = finalData.split("\n");
+  let players = [];
+  splitData.forEach((line) => {
+    console.log(`line: ${line}`);
+    let tuple = line.split(",");
+    players.push([tuple]);
+  });
   
+  console.log("finalData:");
+  console.log(finalData);
+  console.log("players:");
+  console.log(players);
+
 }
