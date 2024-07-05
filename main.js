@@ -97,10 +97,10 @@ function processPlayerList() {
     // cuts of anything after this delimiter in this line
     let tuple = line.split("### END_OF_LINE ###");
     // looks for matches
-    tuple = tuple[0].split("### IS_PLAYING ###");
+    tuple = tuple[0].split("---");
     if (tuple.length === 1) {
       // player list case
-      tuple = tuple[0].split("### WITH_ELO ###");
+      tuple = tuple[0].split(",,,");
       if (tuple.length > 1) {
         let eloFirstTuple = [parseFloat(tuple[1]), tuple[0]];
         players.push(eloFirstTuple);
@@ -127,10 +127,10 @@ function processPlayerList() {
   let second = "";
   for (let i = 0; i < players.length; i++) {
     if (first === "") {
-      first = players[i][1] + " ### WITH_ELO ### " + players[i][0].toString();
+      first = players[i][1] + " ,,, " + players[i][0].toString();
     } else {
-      second = players[i][1] + " ### WITH_ELO ### " + players[i][0].toString();
-      finalData = finalData + first + " ### IS_PLAYING ### " + second + " ### END_OF_LINE ### " + "\n";
+      second = players[i][1] + " ,,, " + players[i][0].toString();
+      finalData = finalData + first + " --- " + second +  + " ### END_OF_LINE ### " + "\n";
       first = "";
       second = "";
     }

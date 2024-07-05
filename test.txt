@@ -1,4 +1,4 @@
-PlayerName ### WITH_ELO ### 1000
-PlayerName2 ### WITH_ELO ### 69
-PlayerName3 ### WITH_ELO ### 420
-PlayerName4 ### WITH_ELO ### 42069
+PlayerName ,,, 1000
+PlayerName2 ,,, 69
+PlayerName3 ,,, 420
+PlayerName4 ,,, 42069
