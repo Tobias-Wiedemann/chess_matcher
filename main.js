@@ -88,17 +88,36 @@ ipcMain.on('process', (event) => {
 })
 
 function processPlayerList() {
-  let splitData = finalData.split("\n");
+  const normalizedData = finalData.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  let splitData = normalizedData.split("\n");
   let players = [];
   splitData.forEach((line) => {
     console.log(`line: ${line}`);
-    let tuple = line.split(",");
-    players.push([tuple]);
+    
+    // cuts of anything after this delimiter in this line
+    let tuple = line.split("### END_OF_LINE ###");
+    // looks for matches
+    tuple = tuple[0].split("### IS_PLAYING ###");
+    if (tuple.length === 1) {
+      // player list case
+      tuple = tuple[0].split("### WITH_ELO ###");
+      if (tuple.length > 1) {
+        let eloFirstTuple = [parseFloat(tuple[1]), tuple[0]];
+        players.push(eloFirstTuple);
+      }
+    } else {
+      // match list case
+
+    }
   });
+  
   
   console.log("finalData:");
   console.log(finalData);
   console.log("players:");
   console.log(players);
-
+  
+  players.sort((a, b) => a[0] - b[0]);
+  console.log("sorted players:");
+  console.log(players);
 }
