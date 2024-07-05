@@ -120,4 +120,23 @@ function processPlayerList() {
   players.sort((a, b) => a[0] - b[0]);
   console.log("sorted players:");
   console.log(players);
+
+
+  finalData = "";
+  let first = "";
+  let second = "";
+  for (let i = 0; i < players.length; i++) {
+    if (first === "") {
+      first = players[i][1] + " ### WITH_ELO ### " + players[i][0].toString();
+    } else {
+      second = players[i][1] + " ### WITH_ELO ### " + players[i][0].toString();
+      finalData = finalData + first + " ### IS_PLAYING ### " + second + " ### END_OF_LINE ### " + "\n";
+      first = "";
+      second = "";
+    }
+  }
+
+  console.log("finalData:");
+  console.log(finalData);
+
 }
