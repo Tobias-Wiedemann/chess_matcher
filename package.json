@@ -1,16 +1,24 @@
 {
-  "name": "my_first_electron_app",
+  "name": "chess_matcher",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-   "dev": "nodemon --exec electron ."
+    "dev": "nodemon --exec electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "chessmatcher",
+    "win": {
+      "target": "nsis"
+    }
   },
   "author": "",
   "license": "MIT",
   "description": "",
   "devDependencies": {
     "electron": "^31.0.1",
+    "electron-builder": "^24.13.3",
     "nodemon": "^3.1.4"
   }
 }
