@@ -65,7 +65,7 @@ ipcMain.on('save-file', (event, data) => {
   if (data === '') {
     event.reply('response-data', { message: 'Tried to open empty file path' });
   } else {
-    resultPath = './' + data + '.txt';
+    resultPath = path.dirname(inputPath) + '/' + data + '.txt';
     try {
       fs.writeFile(resultPath, finalData, err => {
         if (err) {
@@ -106,21 +106,25 @@ function processPlayerList() {
         players.push(eloFirstTuple);
       }
     } else {
-      // match list case
-      let result = tuple[1].split("'");
-      console.log(`game result ${result}`);
-      console.log(`${typeof (result)}`);
-      let first_player_res = result[1].split(':')[0].toString();
-      console.log(`first_player_res ${first_player_res}`);
-      let eloFirstTuple;
-      if (first_player_res === '1') {
-        let proceedingPlayer = tuple[0].split(',');
-        eloFirstTuple = [parseFloat(proceedingPlayer[1]), proceedingPlayer[0]];
-      } else {
-        let proceedingPlayer = result[0].split(',');
-        eloFirstTuple = [parseFloat(proceedingPlayer[1]), proceedingPlayer[0]];
+      try {
+        // match list case
+        let result = tuple[1].split("'");
+        console.log(`game result ${result}`);
+        console.log(`${typeof (result)}`);
+        let first_player_res = result[1].split(':')[0].toString();
+        console.log(`first_player_res ${first_player_res}`);
+        let eloFirstTuple;
+        if (first_player_res === '1') {
+          let proceedingPlayer = tuple[0].split(',');
+          eloFirstTuple = [parseFloat(proceedingPlayer[1]), proceedingPlayer[0]];
+        } else {
+          let proceedingPlayer = result[0].split(',');
+          eloFirstTuple = [parseFloat(proceedingPlayer[1]), proceedingPlayer[0]];
+        }
+        players.push(eloFirstTuple);
+      } catch (e) {
+        console.log(e);
       }
-      players.push(eloFirstTuple);
     }
   });
 
