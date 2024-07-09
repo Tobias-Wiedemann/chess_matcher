@@ -130,12 +130,12 @@ function processPlayerList() {
     if (i === players.length - 1) {
       // odd number case
       first = players[i][1] + ", " + players[i][0].toString();
-      finalData = finalData + first + " ### " + "\n";
+      finalData = finalData + first + "\n";
       break;
     }
     first = players[i][1] + ", " + players[i][0].toString();
     second = players[i][1] + ", " + players[i + 1][0].toString();
-    finalData = finalData + first + " - " + second + " ### " + "\n";
+    finalData = finalData + first + " - " + second + "\n";
     first = "";
     second = "";
   }
