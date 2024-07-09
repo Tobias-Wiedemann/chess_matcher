@@ -147,7 +147,7 @@ function processPlayerList() {
       break;
     }
     first = players[i][1] + ", " + players[i][0].toString();
-    second = players[i][1] + ", " + players[i + 1][0].toString();
+    second = players[i + 1][1] + ", " + players[i + 1][0].toString();
     finalData = finalData + first + " - " + second + "\n";
     first = "";
     second = "";

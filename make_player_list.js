@@ -4,7 +4,7 @@ const fs = require('fs');
 let resultPath = "generated.txt";
 let finalData = "";
 
-for (let i = 0; i < 107; i++) {
+for (let i = 0; i < 11; i++) {
     finalData = finalData + "Player" + (Math.floor(Math.random() * 10000)).toString() + ", " + (Math.floor(Math.random() * 2300)).toString() + "\n";
 }
 
