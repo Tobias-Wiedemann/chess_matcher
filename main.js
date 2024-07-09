@@ -143,7 +143,7 @@ function processPlayerList() {
     if (i === players.length - 1) {
       // odd number case
       first = players[i][1].trim() + ", " + players[i][0].toString().trim();
-      finalData = finalData.trim() + first + "\n";
+      finalData = finalData + first + "\n";
       break;
     }
     first = players[i][1].trim() + ", " + players[i][0].toString().trim();
